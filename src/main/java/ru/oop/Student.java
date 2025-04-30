@@ -1,7 +1,7 @@
 package ru.oop;
 
 public class Student {
-    public void musik() {
+    public void music() {
         System.out.println("Tra, tra,tra");
     }
 
@@ -11,9 +11,9 @@ public class Student {
 
     public static void main(String[] args) {
         Student petya = new Student();
-        petya.musik();
-        petya.musik();
-        petya.musik();
+        petya.music();
+        petya.music();
+        petya.music();
         petya.sing();
         petya.sing();
         petya.sing();

@@ -1,5 +1,7 @@
 package ru.tracker;
 
+import java.util.Arrays;
+
 public class Tracker {
     private final Item[] items = new Item[100];
     private int ids = 1;
@@ -21,5 +23,19 @@ public class Tracker {
             }
         }
         return rsl;
+    }
+
+    public Item[] findAll() {
+        return Arrays.copyOf(items, size);
+    }
+
+    public Item[] findByName(String key) {
+        Tracker item = new Tracker();
+        for (int i = 0; i < size; i++) {
+            if (items[i].getName() != null && key.equals(items[i].getName())) {
+                item.add(items[i]);
+            }
+        }
+        return item.findAll();
     }
 }

@@ -1,0 +1,10 @@
+package ru.tracker;
+
+import java.time.format.DateTimeFormatter;
+
+public class StartUI {
+    public static void main(String[] args) {
+        Item item = new Item();
+        System.out.println(item.getLocalDateTime().format(DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH : mm : ss")));
+    }
+}

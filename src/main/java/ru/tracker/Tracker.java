@@ -15,15 +15,32 @@ public class Tracker {
 
     public Item findById(int id) {
         Item rsl = null;
-        for (int index = 0; index < size; index++) {
-            Item item = items[index];
-            if (item.getId() == id) {
-                rsl = item;
-                break;
-            }
+        Item item = items[indexOf(id)];
+        if (item.getId() == id) {
+            rsl = item;
         }
         return rsl;
     }
+
+    private int indexOf(int id) {
+        for (int index = 0; index < size; index++) {
+            Item item = items[index];
+            if (item.getId() == id) {
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    public boolean replace(int id, Item item) {
+        int index = indexOf(id);
+        if (index > -1 && items[index].getId() == id) {
+            items[index].setName(item.getName());
+            return true;
+        }
+        return false;
+    }
+
 
     public Item[] findAll() {
         return Arrays.copyOf(items, size);

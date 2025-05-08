@@ -14,12 +14,7 @@ public class Tracker {
     }
 
     public Item findById(int id) {
-        Item rsl = null;
-        Item item = items[indexOf(id)];
-        if (item.getId() == id) {
-            rsl = item;
-        }
-        return rsl;
+        return items[indexOf(id)];
     }
 
     private int indexOf(int id) {

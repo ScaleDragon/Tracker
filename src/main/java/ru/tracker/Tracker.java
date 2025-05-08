@@ -14,12 +14,9 @@ public class Tracker {
     }
 
     public Item findById(int id) {
-        Item rsl = null;
         int index = indexOf(id);
-        if (index != -1) {
-            return items[index];
-        }
-        return null;
+        Item rsl = index != -1 ? items[index] : null;
+        return rsl;
     }
 
     private int indexOf(int id) {

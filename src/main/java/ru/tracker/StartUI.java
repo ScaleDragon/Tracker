@@ -21,7 +21,7 @@ public class StartUI {
                 System.out.println("=== Вывод всех заявок ===");
                 Item[] array = tracker.findAll();
                 if (array.length != 0) {
-                    for (Item item : tracker.findAll()) {
+                    for (Item item : array) {
                         System.out.println(item);
                     }
                 } else {

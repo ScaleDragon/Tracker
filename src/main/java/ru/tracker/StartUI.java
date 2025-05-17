@@ -29,16 +29,15 @@ public class StartUI {
                 }
             } else if (select == 2) {
                 System.out.println("=== Изменение заявки ===");
-                System.out.print("Введите номер заявки: ");
+                System.out.print("Введите ID заявки: ");
                 int number = Integer.parseInt(scanner.nextLine());
-                if (tracker.findById(number) != null) {
-                    System.out.println("Введите имя заявки");
-                    String name = scanner.nextLine();
-                    Item item = new Item(name);
-                    tracker.replace(number, item);
+                System.out.print("Введите имя заявки: ");
+                String name = scanner.nextLine();
+                Item item = new Item(name);
+                if (tracker.replace(number, item)) {
                     System.out.println("=== Заявка изменена ===\n" + item);
                 } else {
-                    System.out.println("=== Данной заявки не существут ===");
+                    System.out.println("=== Заявки с ID " + number + " не существут ===");
                 }
             } else if (select == 6) {
                 run = false;

@@ -39,6 +39,18 @@ public class StartUI {
                 } else {
                     System.out.println("=== Заявки с ID " + id + " не существут ===");
                 }
+            } else if (select == 3) {
+                System.out.println("=== Удаление заявки ===");
+                System.out.print("Введите ID заявки: ");
+                int id = Integer.parseInt(scanner.nextLine());
+                int sizeBefore = tracker.findAll().length;
+                tracker.delete(id);
+                int sizeAfter = tracker.findAll().length;
+                if (sizeBefore != sizeAfter) {
+                    System.out.println("=== Заявка удалена ===");
+                } else {
+                    System.out.println("=== Заявка не удалена ===");
+                }
             } else if (select == 6) {
                 run = false;
             }

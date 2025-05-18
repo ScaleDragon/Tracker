@@ -30,14 +30,14 @@ public class StartUI {
             } else if (select == 2) {
                 System.out.println("=== Изменение заявки ===");
                 System.out.print("Введите ID заявки: ");
-                int number = Integer.parseInt(scanner.nextLine());
+                int id = Integer.parseInt(scanner.nextLine());
                 System.out.print("Введите имя заявки: ");
                 String name = scanner.nextLine();
                 Item item = new Item(name);
-                if (tracker.replace(number, item)) {
+                if (tracker.replace(id, item)) {
                     System.out.println("=== Заявка изменена ===\n" + item);
                 } else {
-                    System.out.println("=== Заявки с ID " + number + " не существут ===");
+                    System.out.println("=== Заявки с ID " + id + " не существут ===");
                 }
             } else if (select == 6) {
                 run = false;

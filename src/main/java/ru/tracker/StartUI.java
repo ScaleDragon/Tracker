@@ -43,10 +43,8 @@ public class StartUI {
                 System.out.println("=== Удаление заявки ===");
                 System.out.print("Введите ID заявки: ");
                 int id = Integer.parseInt(scanner.nextLine());
-                int sizeBefore = tracker.findAll().length;
-                tracker.delete(id);
-                int sizeAfter = tracker.findAll().length;
-                if (sizeBefore != sizeAfter) {
+                if (tracker.findById(id) != null) {
+                    tracker.delete(id);
                     System.out.println("=== Заявка удалена ===");
                 } else {
                     System.out.println("=== Заявка не удалена ===");

@@ -43,12 +43,10 @@ public class StartUI {
                 System.out.println("=== Удаление заявки ===");
                 System.out.print("Введите ID заявки: ");
                 int id = Integer.parseInt(scanner.nextLine());
-                if (tracker.findById(id) != null) {
-                    tracker.delete(id);
-                    System.out.println("=== Заявка удалена ===");
-                } else {
-                    System.out.println("=== Заявка не удалена ===");
-                }
+                Item item = tracker.findById(id);
+                tracker.delete(id);
+                System.out.println(item != null ? "Заявка удалена успешно." : "Ошибка удаления заявки.");
+
             } else if (select == 4) {
                 System.out.println("=== Показать заявку ===");
                 System.out.print("Введите ID заявки: ");
@@ -58,6 +56,18 @@ public class StartUI {
                     System.out.println(item);
                 } else {
                     System.out.println("Такой заявки не существует");
+                }
+            } else if (select == 5) {
+                System.out.println("=== Показать заявки по имени ===");
+                System.out.print("Введите имя заявки: ");
+                String name = scanner.nextLine();
+                Item[] item = tracker.findByName(name);
+                if (item.length > 0) {
+                    for (Item rls : item) {
+                        System.out.println(rls);
+                    }
+                } else {
+                    System.out.println("Заявки с таким именем не найдены");
                 }
             } else if (select == 6) {
                 run = false;

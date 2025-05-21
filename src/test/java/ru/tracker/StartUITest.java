@@ -12,7 +12,6 @@ class StartUITest {
         Input input = new MockInput(answers);
         Tracker tracker = new Tracker();
         StartUI.createItem(input, tracker);
-        StartUI.createItem(input, tracker);
         Item created = tracker.findAll()[0];
         Item expected = new Item("Fix PC");
         assertThat(created.getName()).isEqualTo(expected.getName());

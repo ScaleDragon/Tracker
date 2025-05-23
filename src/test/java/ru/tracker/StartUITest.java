@@ -38,8 +38,9 @@ class StartUITest {
     void whenDeleteItem() {
         Input input = new MockInput(new String[]{"0", "1", "1"});
         Tracker tracker = new Tracker();
-        Item item = new Item("Item");
-        tracker.add(item);
+        tracker.add(new Item("Item"));
+        tracker.add(new Item("test"));
+        tracker.add(new Item("test 2"));
         UserAction[] actions = {
                 new DeleteAction(),
                 new ExitAction()

@@ -1,9 +1,14 @@
-package ru.tracker;
+package ru.tracker.action;
 
-public class FindAllAction implements UserAction {
+import ru.tracker.input.Input;
+import ru.tracker.Item;
+import ru.tracker.output.Output;
+import ru.tracker.Tracker;
+
+public class FindAll implements UserAction {
     private final Output output;
 
-    public FindAllAction(Output output) {
+    public FindAll(Output output) {
         this.output = output;
     }
 

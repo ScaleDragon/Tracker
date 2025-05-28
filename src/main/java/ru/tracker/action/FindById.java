@@ -1,9 +1,14 @@
-package ru.tracker;
+package ru.tracker.action;
 
-public class FindByIdAction implements UserAction {
+import ru.tracker.input.Input;
+import ru.tracker.Item;
+import ru.tracker.output.Output;
+import ru.tracker.Tracker;
+
+public class FindById implements UserAction {
     private final Output output;
 
-    public FindByIdAction(Output output) {
+    public FindById(Output output) {
         this.output = output;
     }
 

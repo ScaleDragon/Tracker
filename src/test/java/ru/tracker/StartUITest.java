@@ -10,8 +10,7 @@ class StartUITest {
     void whenCreateItem() {
         Output output = new MockOutput();
         Input input = new MockInput(
-                new String[]{"0", "Item name", "1"}
-        );
+                new String[]{"0", "Item name", "1"}, output);
         Tracker tracker = new Tracker();
         UserAction[] actions = {
                 new CreateAction(output),
@@ -24,7 +23,7 @@ class StartUITest {
     @Test
     void whenDeleteItem() {
         Output output = new MockOutput();
-        Input input = new MockInput(new String[]{"0", "1", "1"});
+        Input input = new MockInput(new String[]{"0", "1", "1"}, output);
         Tracker tracker = new Tracker();
         tracker.add(new Item("Item"));
         tracker.add(new Item("test"));
@@ -44,8 +43,7 @@ class StartUITest {
         Item one = tracker.add(new Item("test1"));
         String replaceName = "New Test Name";
         Input input = new MockInput(
-                new String[]{"0", String.valueOf(one.getId()), replaceName, "1"}
-        );
+                new String[]{"0", String.valueOf(one.getId()), replaceName, "1"}, output);
         UserAction[] actions = new UserAction[]{
                 new ReplaceAction(output),
                 new ExitAction(output)
@@ -56,11 +54,15 @@ class StartUITest {
                 "Меню:" + ln
                         + "0. Изменить заявку" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Изменение заявки ===" + ln
+                        + "Введите ID заявки: " + ln
+                        + "Введите имя заявки: " + ln
                         + "Заявка изменена" + ln
                         + "Меню:" + ln
                         + "0. Изменить заявку" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Завершение программы ===" + ln
         );
     }
@@ -73,8 +75,7 @@ class StartUITest {
         Item two = tracker.add(new Item("test2"));
         String replaceName = "New Test Name";
         Input input = new MockInput(
-                new String[]{"0", "3", replaceName, "1"}
-        );
+                new String[]{"0", "3", replaceName, "1"}, output);
         UserAction[] actions = new UserAction[]{
                 new ReplaceAction(output),
                 new ExitAction(output)
@@ -85,11 +86,15 @@ class StartUITest {
                 "Меню:" + ln
                         + "0. Изменить заявку" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Изменение заявки ===" + ln
+                        + "Введите ID заявки: " + ln
+                        + "Введите имя заявки: " + ln
                         + "=== Заявки с ID 3 не существут ===" + ln
                         + "Меню:" + ln
                         + "0. Изменить заявку" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Завершение программы ===" + ln
         );
     }
@@ -100,7 +105,7 @@ class StartUITest {
         Tracker tracker = new Tracker();
         Item one = tracker.add(new Item(("item 1")));
         Item two = tracker.add(new Item("test 2"));
-        Input input = new MockInput(new String[]{"0", "1"});
+        Input input = new MockInput(new String[]{"0", "1"}, output);
         UserAction[] actions = new UserAction[]{
                 new FindAllAction(output),
                 new ExitAction(output)
@@ -111,12 +116,14 @@ class StartUITest {
                 "Меню:" + ln
                         + "0. Показать все заявки" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Вывод всех заявок ===" + ln
                         + one + ln
                         + two + ln
                         + "Меню:" + ln
                         + "0. Показать все заявки" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Завершение программы ===" + ln
         );
     }
@@ -125,7 +132,7 @@ class StartUITest {
     void whenFindAllItemTestOutputIsNotSuccessfully() {
         Output output = new MockOutput();
         Tracker tracker = new Tracker();
-        Input input = new MockInput(new String[]{"0", "1"});
+        Input input = new MockInput(new String[]{"0", "1"}, output);
         UserAction[] actions = new UserAction[]{
                 new FindAllAction(output),
                 new ExitAction(output)
@@ -136,11 +143,13 @@ class StartUITest {
                 "Меню:" + ln
                         + "0. Показать все заявки" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Вывод всех заявок ===" + ln
                         + "Хранилище еще не содержит заявок" + ln
                         + "Меню:" + ln
                         + "0. Показать все заявки" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Завершение программы ===" + ln
         );
     }
@@ -151,7 +160,7 @@ class StartUITest {
         Tracker tracker = new Tracker();
         Item one = tracker.add(new Item(("item 1")));
         Item two = tracker.add(new Item("item 2"));
-        Input input = new MockInput(new String[]{"0", two.getName(), "1"});
+        Input input = new MockInput(new String[]{"0", two.getName(), "1"}, output);
         UserAction[] actions = new UserAction[]{
                 new FindByNameAction(output),
                 new ExitAction(output)
@@ -162,11 +171,14 @@ class StartUITest {
                 "Меню:" + ln
                         + "0. Показать заявки по имени" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Показать заявки по имени ===" + ln
+                        + "Введите имя заявки: " + ln
                         + two + ln
                         + "Меню:" + ln
                         + "0. Показать заявки по имени" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Завершение программы ===" + ln
         );
     }
@@ -177,7 +189,7 @@ class StartUITest {
         Tracker tracker = new Tracker();
         Item one = tracker.add(new Item(("item 1")));
         Item two = tracker.add(new Item("item 2"));
-        Input input = new MockInput(new String[]{"0", "item 3", "1"});
+        Input input = new MockInput(new String[]{"0", "item 3", "1"}, output);
         UserAction[] actions = new UserAction[]{
                 new FindByNameAction(output),
                 new ExitAction(output)
@@ -188,11 +200,14 @@ class StartUITest {
                 "Меню:" + ln
                         + "0. Показать заявки по имени" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Показать заявки по имени ===" + ln
+                        + "Введите имя заявки: " + ln
                         + "Заявки с таким именем не найдены" + ln
                         + "Меню:" + ln
                         + "0. Показать заявки по имени" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Завершение программы ===" + ln
         );
     }
@@ -203,7 +218,7 @@ class StartUITest {
         Tracker tracker = new Tracker();
         Item one = tracker.add(new Item(("item 1")));
         Item two = tracker.add(new Item("item 2"));
-        Input input = new MockInput(new String[]{"0", String.valueOf(two.getId()), "1"});
+        Input input = new MockInput(new String[]{"0", String.valueOf(two.getId()), "1"}, output);
         UserAction[] actions = new UserAction[]{
                 new FindByIdAction(output),
                 new ExitAction(output)
@@ -214,11 +229,14 @@ class StartUITest {
                 "Меню:" + ln
                         + "0. Показать заявку по id" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Показать заявку ===" + ln
+                        + "Введите ID заявки: " + ln
                         + two + ln
                         + "Меню:" + ln
                         + "0. Показать заявку по id" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Завершение программы ===" + ln
         );
     }
@@ -229,7 +247,7 @@ class StartUITest {
         Tracker tracker = new Tracker();
         Item one = tracker.add(new Item(("item 1")));
         Item two = tracker.add(new Item("item 2"));
-        Input input = new MockInput(new String[]{"0", "3", "1"});
+        Input input = new MockInput(new String[]{"0", "3", "1"}, output);
         UserAction[] actions = new UserAction[]{
                 new FindByIdAction(output),
                 new ExitAction(output)
@@ -240,11 +258,14 @@ class StartUITest {
                 "Меню:" + ln
                         + "0. Показать заявку по id" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Показать заявку ===" + ln
+                        + "Введите ID заявки: " + ln
                         + "Такой заявки не существует" + ln
                         + "Меню:" + ln
                         + "0. Показать заявку по id" + ln
                         + "1. Завершить программу" + ln
+                        + "Выбрать: " + ln
                         + "=== Завершение программы ===" + ln
         );
     }

@@ -1,8 +1,8 @@
 package ru.tracker;
 
 import ru.tracker.action.*;
-import ru.tracker.input.ConsoleInput;
 import ru.tracker.input.Input;
+import ru.tracker.input.ValidateInput;
 import ru.tracker.output.ConsoleOutput;
 import ru.tracker.output.Output;
 
@@ -16,10 +16,18 @@ public class StartUI {
     public void init(Input input, Tracker tracker, UserAction[] actions) {
         boolean run = true;
         while (run) {
-            showMenu(actions);
-            int select = input.askInt("Выбрать: ");
-            UserAction action = actions[select];
-            run = action.execute(input, tracker);
+            try {
+                showMenu(actions);
+                int select = input.askInt("Выбрать: ");
+                if (select < 0 || select >= actions.length) {
+                    System.out.println("Неверный ввод, вы можете выбрать: 0 .. " + (actions.length - 1));
+                    continue;
+                }
+                UserAction action = actions[select];
+                run = action.execute(input, tracker);
+            } catch (NumberFormatException e) {
+                System.out.println("Пожалуйста, введите корректные данные");
+            }
         }
     }
 
@@ -32,7 +40,7 @@ public class StartUI {
 
     public static void main(String[] args) {
         Output output = new ConsoleOutput();
-        Input input = new ConsoleInput();
+        Input input = new ValidateInput();
         Tracker tracker = new Tracker();
         UserAction[] actions = {
                 new Create(output),

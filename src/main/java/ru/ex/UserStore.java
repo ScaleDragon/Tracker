@@ -2,17 +2,12 @@ package ru.ex;
 
 public class UserStore {
     public static User findUser(User[] users, String login) throws UserNotFoundException {
-        User rsl = null;
         for (int i = 0; i < users.length; i++) {
             if (users[i].getUsername().equals(login)) {
-                rsl = users[i];
-                break;
+                return users[i];
             }
         }
-        if (rsl == null) {
-            throw new UserNotFoundException("User \"" + login + "\" not Found");
-        }
-        return rsl;
+        throw new UserNotFoundException("User \"" + login + "\" not Found");
     }
 
     public static boolean validate(User user) throws UserInvalidException {

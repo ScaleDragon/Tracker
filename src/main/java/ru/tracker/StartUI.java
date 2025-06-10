@@ -16,18 +16,14 @@ public class StartUI {
     public void init(Input input, Tracker tracker, UserAction[] actions) {
         boolean run = true;
         while (run) {
-            try {
-                showMenu(actions);
-                int select = input.askInt("Выбрать: ");
-                if (select < 0 || select >= actions.length) {
-                    System.out.println("Неверный ввод, вы можете выбрать: 0 .. " + (actions.length - 1));
-                    continue;
-                }
-                UserAction action = actions[select];
-                run = action.execute(input, tracker);
-            } catch (NumberFormatException e) {
-                System.out.println("Пожалуйста, введите корректные данные");
+            showMenu(actions);
+            int select = input.askInt("Выбрать: ");
+            if (select < 0 || select >= actions.length) {
+                System.out.println("Неверный ввод, вы можете выбрать: 0 .. " + (actions.length - 1));
+                continue;
             }
+            UserAction action = actions[select];
+            run = action.execute(input, tracker);
         }
     }
 

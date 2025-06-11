@@ -20,21 +20,12 @@ public class FindById implements UserAction {
     @Override
     public boolean execute(Input input, Tracker tracker) {
         output.println("=== Показать заявку ===");
-        boolean flag = true;
-        while (flag) {
-            try {
-                int id = input.askInt("Введите ID заявки: ");
-                Item item = tracker.findById(id);
-                if (item != null) {
-                    output.println(item);
-                    flag = false;
-                } else {
-                    output.println("Такой заявки не существует");
-                    flag = false;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Пожалуйста, введите корректные данные");
-            }
+        int id = input.askInt("Введите ID заявки: ");
+        Item item = tracker.findById(id);
+        if (item != null) {
+            output.println(item);
+        } else {
+            output.println("Такой заявки не существует");
         }
         return true;
     }

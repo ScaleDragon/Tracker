@@ -1,7 +1,6 @@
 package ru.tracker;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 import ru.tracker.action.*;
 import ru.tracker.input.Input;
 import ru.tracker.input.MockInput;

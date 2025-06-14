@@ -8,7 +8,6 @@ import ru.tracker.output.MockOutput;
 import ru.tracker.output.Output;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class StartUITest {
 
@@ -280,20 +279,22 @@ class StartUITest {
     void whenInvalidExit() {
         Output output = new MockOutput();
         Tracker tracker = new Tracker();
-        Input input = new MockInput(new String[]{"2"}, output);
+        Input input = new MockInput(new String[]{"2", "1"}, output);
         UserAction[] actions = new UserAction[]{
                 new Create(output),
                 new Exit(output)
         };
-        ArrayIndexOutOfBoundsException exeption =
-                assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
-                    try {
-                        new StartUI(output).init(input, tracker, actions);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new ArrayIndexOutOfBoundsException("Неверный ввод, вы можете выбрать: 0 .. " + (actions.length - 1));
-                    }
-                });
-        assertThat(exeption.getMessage()).isEqualTo("Неверный ввод, вы можете выбрать: 0 .. " + (actions.length - 1));
+        new StartUI(output).init(input, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(output.toString()).isEqualTo("Меню:" + ln
+                + "0. Добавить новую заявку" + ln
+                + "1. Завершить программу" + ln
+                + "Выбрать: " + ln
+                + "Меню:" + ln
+                + "0. Добавить новую заявку" + ln
+                + "1. Завершить программу" + ln
+                + "Выбрать: " + ln
+                + "=== Завершение программы ===" + ln);
     }
 
     @Test

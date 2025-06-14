@@ -18,13 +18,19 @@ public class StartUI {
         boolean run = true;
         while (run) {
             showMenu(actions);
+            try {
             int select = input.askInt("Выбрать: ");
-            if (select < 0 || select >= actions.length) {
+//            if (select < 0 || select >= actions.length) {
+//                System.out.println("Неверный ввод, вы можете выбрать: 0 .. " + (actions.length - 1));
+//                continue;
+//            }
+
+                UserAction action = actions[select];
+                run = action.execute(input, tracker);
+            }catch (ArrayIndexOutOfBoundsException e){
                 System.out.println("Неверный ввод, вы можете выбрать: 0 .. " + (actions.length - 1));
-                continue;
             }
-            UserAction action = actions[select];
-            run = action.execute(input, tracker);
+
         }
     }
 
